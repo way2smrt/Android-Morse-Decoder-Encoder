@@ -22,12 +22,12 @@ public class Encode extends AppCompatActivity {
         setContentView(R.layout.activity_encode);
         encoder = new Encoder();
         editText = (EditText) findViewById(R.id.editText);
-        button = (Button) findViewById(R.id.enterButton);
+        button = (Button) findViewById(R.id.decodeButton);
         textView = (TextView) findViewById(R.id.textView);
     }
 
     public void encodeText(View view) {
-        String text = editText.getText().toString();
+        String text = editText.getText().toString().toLowerCase();
         String encoded = encoder.encode(text);
         textView.setText(encoded);
     }
