@@ -1,4 +1,4 @@
-package morsecode;
+package progbuddies.morsecode;
 
 import java.util.Arrays;
 import java.util.HashMap;

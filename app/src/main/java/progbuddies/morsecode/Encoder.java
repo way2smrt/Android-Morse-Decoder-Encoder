@@ -1,10 +1,8 @@
-package morsecode;
-
+package progbuddies.morsecode;
 import java.util.HashMap;
 
-
 /**
- *
+ *@author Bilal Tahir <bilal@bilaltahir.com>
  */
 public class Encoder {
 
