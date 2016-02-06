@@ -1,4 +1,4 @@
-package morsecode;
+package progbuddies.morsecode;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>

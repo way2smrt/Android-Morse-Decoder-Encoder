@@ -1,10 +1,8 @@
-package morsecode;
-
+package progbuddies.morsecode;
 import java.util.HashMap;
 
-
 /**
- *
+ *@author Bilal Tahir <bilal@bilaltahir.com>
  */
 public class Encoder {
 
@@ -78,17 +76,6 @@ public class Encoder {
         }
 
         return builder.toString();
-    }
-
-
-
-
-
-    public static void main(String args[]) {
-        Encoder encoder = new Encoder();
-        Decoder decoder = new Decoder();
-        System.out.println(encoder.encode("HELLO WORLD"));
-        System.out.println(decoder.decode(".... . .-.. .-.. ---    .-- --- .-. .-.. -..    "));
     }
 
 }
