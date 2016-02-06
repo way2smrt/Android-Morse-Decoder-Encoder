@@ -6,9 +6,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import progbuddies.morsecode.Encoder;
-
+/**
+ * @author Bilal Tahir <bilal@bilaltahir.com>
+ *
+ */
 public class Encode extends AppCompatActivity {
-
 
     Encoder encoder;
     EditText editText;
@@ -25,6 +27,9 @@ public class Encode extends AppCompatActivity {
         button = (Button) findViewById(R.id.decodeButton);
         textView = (TextView) findViewById(R.id.textView);
     }
+
+
+    //TODO: Either remove all special characters from text while encoding or add the mapping currently only a-z and 0-9 are supported characters
 
     public void encodeText(View view) {
         String text = editText.getText().toString().toLowerCase();

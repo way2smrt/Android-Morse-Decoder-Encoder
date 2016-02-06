@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+/**
+ * @author Bilal Tahir <bilal@bilaltahir.com>
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
 	Button encodeButton;

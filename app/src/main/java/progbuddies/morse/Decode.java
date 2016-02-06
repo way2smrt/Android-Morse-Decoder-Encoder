@@ -8,7 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import progbuddies.morsecode.Decoder;
-
+/**
+ * @author Bilal Tahir <bilal@bilaltahir.com>
+ *
+ */
 public class Decode extends AppCompatActivity {
 
     Decoder decoder;
@@ -26,7 +29,6 @@ public class Decode extends AppCompatActivity {
         button = (Button) findViewById(R.id.decodeButton);
         textView = (TextView) findViewById(R.id.textView);
     }
-
 
     public void decodeText(View view) {
         String encodedText = editText.getText().toString().toLowerCase();
