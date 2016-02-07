@@ -1,33 +1,37 @@
 package progbuddies.morse;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import progbuddies.morsecode.Decoder;
+
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
  *
  */
-public class Decode extends AppCompatActivity {
+public class Decode extends android.support.v4.app.Fragment {
 
     Decoder decoder;
     EditText editText;
     Button button;
     TextView textView;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_decode, container, false);
+
         decoder = new Decoder();
-        setContentView(R.layout.activity_decode);
-        editText = (EditText) findViewById(R.id.editText);
-        button = (Button) findViewById(R.id.decodeButton);
-        textView = (TextView) findViewById(R.id.textView);
+        editText = (EditText) view.findViewById(R.id.editText);
+        button = (Button) view.findViewById(R.id.decodeButton);
+        textView = (TextView) view.findViewById(R.id.textView);
+
+        return view;
     }
 
     public void decodeText(View view) {

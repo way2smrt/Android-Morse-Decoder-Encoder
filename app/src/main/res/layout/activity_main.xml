@@ -4,27 +4,40 @@
                 android:layout_height="match_parent"
                 tools:context=".MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Encode"
-        android:id="@+id/encodeButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:onClick="beginEncodeActivity"
-        />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Decode"
-        android:id="@+id/decodeButton"
-        android:layout_below="@+id/encodeButton"
-        android:layout_alignLeft="@+id/encodeButton"
-        android:layout_alignStart="@+id/encodeButton"
-        android:layout_marginTop="85dp"
-        android:onClick="beginDecodeActivity"
-        />
+    <android.support.v4.app.FragmentTabHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tabHost">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TabWidget>
+
+            <!--
+            This frame layout is not used and does not display anything from what I've seen,
+            however it is required by FragmentTabHost and removing it will raise an error.
+
+            Some kind of weird support thing? Either way I might test this later with lower version
+            -->
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp">
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/realtabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v4.app.FragmentTabHost>
 </RelativeLayout>

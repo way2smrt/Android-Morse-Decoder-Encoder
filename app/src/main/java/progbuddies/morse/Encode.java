@@ -1,7 +1,9 @@
 package progbuddies.morse;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,7 +12,7 @@ import progbuddies.morsecode.Encoder;
  * @author Bilal Tahir <bilal@bilaltahir.com>
  *
  */
-public class Encode extends AppCompatActivity {
+public class Encode extends android.support.v4.app.Fragment {
 
     Encoder encoder;
     EditText editText;
@@ -19,13 +21,15 @@ public class Encode extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_encode);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_encode, container, false);
+
         encoder = new Encoder();
-        editText = (EditText) findViewById(R.id.editText);
-        button = (Button) findViewById(R.id.decodeButton);
-        textView = (TextView) findViewById(R.id.textView);
+        editText = (EditText) view.findViewById(R.id.editText);
+        button = (Button) view.findViewById(R.id.encodeButton);
+        textView = (TextView) view.findViewById(R.id.textView);
+
+        return view;
     }
 
 

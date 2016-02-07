@@ -1,35 +1,25 @@
 package progbuddies.morse;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
  *
  */
-public class MainActivity extends AppCompatActivity {
-
-	Button encodeButton;
-	Button decodeButton;
+public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		encodeButton = (Button) findViewById(R.id.encodeButton);
-		decodeButton = (Button) findViewById(R.id.decodeButton);
+
+		//Create tabs
+		FragmentTabHost tabHost = (FragmentTabHost)findViewById(R.id.tabHost);
+		tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+
+		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("Encode"), Encode.class, null);
+		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("Decode"), Decode.class, null);
 	}
-
-    public void beginEncodeActivity(View view) {
-        Intent intent = new Intent(this, Encode.class);
-        startActivity(intent);
-    }
-
-    public void beginDecodeActivity(View view) {
-        Intent intent = new Intent(this, Decode.class);
-        startActivity(intent);
-    }
-
 }
