@@ -12,7 +12,7 @@ import progbuddies.morsecode.Encoder;
  * @author Bilal Tahir <bilal@bilaltahir.com>
  *
  */
-public class Encode extends android.support.v4.app.Fragment {
+public class EncodeFragment extends android.support.v4.app.Fragment {
 
     Encoder encoder;
     EditText editText;
