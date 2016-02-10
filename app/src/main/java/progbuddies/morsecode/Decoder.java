@@ -12,42 +12,7 @@ public class Decoder {
     private HashMap<String, Character> map = new HashMap<>();
 
     public Decoder(){
-        map.put(".-",'a');
-        map.put("-...",'b');
-        map.put("-.-.",'c');
-        map.put("-..",'d');
-        map.put(".",'e');
-        map.put("..-.",'f');
-        map.put("--.",'g');
-        map.put("....",'h');
-        map.put("..",'i');
-        map.put(".---",'j');
-        map.put("-.-",'k');
-        map.put(".-..",'l');
-        map.put("--",'m');
-        map.put("-.",'n');
-        map.put("---",'o');
-        map.put(".--.",'p');
-        map.put("-----",'0');
-        map.put("--.-",'q');
-        map.put(".----",'1');
-        map.put(".-.",'r');
-        map.put("..---",'2');
-        map.put("...",'s');
-        map.put("...--",'3');
-        map.put("-",'t');
-        map.put("....-",'4');
-        map.put("..-",'u');
-        map.put(".....",'5');
-        map.put("...-",'v');
-        map.put("-....",'6');
-        map.put(".--",'w');
-        map.put("--...",'7');
-        map.put("-..-",'x');
-        map.put("---..",'8');
-        map.put("-.--",'y');
-        map.put("----.",'9');
-        map.put("--..",'z');
+       map = new Mapper().getMorseToCharMap();
 
     }
 

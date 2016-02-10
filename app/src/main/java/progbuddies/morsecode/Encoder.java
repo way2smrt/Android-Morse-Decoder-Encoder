@@ -6,45 +6,10 @@ import java.util.HashMap;
  */
 public class Encoder {
 
-    private HashMap<Character, String> charToMorseMap = new HashMap<Character, String>();
+    private HashMap<Character, String> charToMorseMap = new HashMap<>();
 
     public Encoder() {
-        charToMorseMap.put('a', ".-");
-        charToMorseMap.put('b', "-...");
-        charToMorseMap.put('c', "-.-.");
-        charToMorseMap.put('d', "-..");
-        charToMorseMap.put('e', ".");
-        charToMorseMap.put('f', "..-.");
-        charToMorseMap.put('g', "--.");
-        charToMorseMap.put('h', "....");
-        charToMorseMap.put('i', "..");
-        charToMorseMap.put('j', ".---");
-        charToMorseMap.put('k', "-.-");
-        charToMorseMap.put('l', ".-..");
-        charToMorseMap.put('m', "--");
-        charToMorseMap.put('n', "-.");
-        charToMorseMap.put('o', "---");
-        charToMorseMap.put('p', ".--.");
-        charToMorseMap.put('q', "--.-");
-        charToMorseMap.put('r', ".-.");
-        charToMorseMap.put('s', "...");
-        charToMorseMap.put('t', "-");
-        charToMorseMap.put('u', "..-");
-        charToMorseMap.put('v', "...-");
-        charToMorseMap.put('w', ".--");
-        charToMorseMap.put('x', "-..-");
-        charToMorseMap.put('y', "-.--");
-        charToMorseMap.put('z', "--..");
-        charToMorseMap.put('1', ".----");
-        charToMorseMap.put('2', "..---");
-        charToMorseMap.put('3', "...--");
-        charToMorseMap.put('4', "....-");
-        charToMorseMap.put('5', ".....");
-        charToMorseMap.put('6', "-....");
-        charToMorseMap.put('7', "--...");
-        charToMorseMap.put('8', "---..");
-        charToMorseMap.put('9', "----.");
-        charToMorseMap.put('0', "-----");
+       charToMorseMap = new Mapper().getCharToMorseMap();
     }
 
 
@@ -75,7 +40,9 @@ public class Encoder {
             builder.append(C.WORD_SEPERATOR);
         }
 
-        return builder.toString();
+        String withOutInvalidCharacters = builder.toString().replace("null", "");
+
+        return withOutInvalidCharacters;
     }
 
 }

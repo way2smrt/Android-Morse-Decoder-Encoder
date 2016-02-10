@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:singleLine="true"
         />
 
     <Button
@@ -21,7 +22,6 @@
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:onClick="encodeText"
         />
 
     <TextView
