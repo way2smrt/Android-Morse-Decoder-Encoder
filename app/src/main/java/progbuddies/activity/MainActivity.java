@@ -1,23 +1,20 @@
-package progbuddies.morse;
+package progbuddies.activity;
 
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
+
+import progbuddies.fragment.DecodeFragment;
+import progbuddies.fragment.EncodeFragment;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
