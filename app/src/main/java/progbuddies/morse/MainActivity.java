@@ -3,21 +3,17 @@ package progbuddies.morse;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
@@ -68,6 +64,17 @@ public class MainActivity extends AppCompatActivity  {
 		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 		toolbar.setTitle("Morse Decoder/Encoder");
 		toolbar.setTitleTextColor(rc.getColor(getResources(), R.color.text_light, null));
+
+		//Align EditText box top to center of title. This is needed to be done programmatically as we need both the title margin and text height
+		EditText editText = (EditText)findViewById(R.id.edit_text);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.MATCH_PARENT,
+				(int)getResources().getDimension(R.dimen.edit_text_height)
+		);
+		params.setMargins((int)getResources().getDimension(R.dimen.edit_text_margin_sides),
+				(int)(getResources().getDimension(R.dimen.edit_text_title_margin_top)+(getResources().getDimension(R.dimen.edit_text_title_height)/2)),
+				(int)getResources().getDimension(R.dimen.edit_text_margin_sides), 0);
+		editText.setLayoutParams(params);
 	}
 
 

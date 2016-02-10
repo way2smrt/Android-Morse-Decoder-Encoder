@@ -25,9 +25,11 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_encode, container, false);
 
         encoder = new Encoder();
+        /*
         editText = (EditText) view.findViewById(R.id.editText);
         button = (Button) view.findViewById(R.id.encodeButton);
         textView = (TextView) view.findViewById(R.id.textView);
+        */
 
         return view;
     }
