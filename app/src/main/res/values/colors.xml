@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="fill">#f7f9f7</color>
+	<color name="dull">#96b597</color>
+	<color name="bold">#246b26</color>
+
+	<color name="text">#454745</color>
+	<color name="text_light">@color/fill</color>
+	<color name="text_bold">#000000</color>
+
+	<color name="transparent">#00000000</color>
+</resources>

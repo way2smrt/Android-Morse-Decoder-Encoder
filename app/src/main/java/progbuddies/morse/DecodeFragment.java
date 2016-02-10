@@ -15,7 +15,7 @@ import progbuddies.morsecode.Decoder;
  * @author Bilal Tahir <bilal@bilaltahir.com>
  *
  */
-public class Decode extends android.support.v4.app.Fragment {
+public class DecodeFragment extends android.support.v4.app.Fragment {
 
     Decoder decoder;
     EditText editText;
@@ -28,7 +28,6 @@ public class Decode extends android.support.v4.app.Fragment {
 
         decoder = new Decoder();
         editText = (EditText) view.findViewById(R.id.editText);
-        button = (Button) view.findViewById(R.id.decodeButton);
         textView = (TextView) view.findViewById(R.id.textView);
 
         return view;

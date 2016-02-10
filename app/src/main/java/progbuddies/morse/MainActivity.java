@@ -1,25 +1,101 @@
 package progbuddies.morse;
 
+import android.os.Build;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
- *
+ * @author Matteo Filia <matteo.compsci@gmail.com>
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity  {
+
+	public static final int CUSTOM_TOP_BAR_COLOR_API = 21;
+
+	ViewPager viewPager;
+	Pager pager;
+	ResourcesCompat rc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		//Create tabs
-		FragmentTabHost tabHost = (FragmentTabHost)findViewById(R.id.tabHost);
-		tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+		//Create resources compat in order to get colors
+		rc = new ResourcesCompat();
+		
+		//Create a FragmentStatePagerAdapter for switching tab content
+		pager = new Pager(getSupportFragmentManager());
 
-		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("Encode"), Encode.class, null);
-		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("Decode"), Decode.class, null);
+		//Get the ViewPager to display tab content
+		viewPager = (ViewPager)findViewById(R.id.view_pager);
+		viewPager.setAdapter(pager);
+
+		//Add tabs and view pager to TabLayout
+		TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
+
+		//Setup tabs and tab fragment content
+		tabLayout.setupWithViewPager(viewPager);
+
+		tabLayout.getTabAt(0).setText("Encode");
+		tabLayout.getTabAt(1).setText("Decode");
+
+		//Set top bar and navigation bar color to match theme, if the device  is at a high enough API to support this
+		if(Build.VERSION.SDK_INT >= CUSTOM_TOP_BAR_COLOR_API){
+			Window window = getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			window.setStatusBarColor(rc.getColor(getResources(), R.color.bold, null));
+			window.setNavigationBarColor(rc.getColor(getResources(), R.color.dull, null));
+		}
+
+		//Setup toolbar (or action bar, as it was formely known)
+		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+		toolbar.setTitle("Morse Decoder/Encoder");
+		toolbar.setTitleTextColor(rc.getColor(getResources(), R.color.text_light, null));
+	}
+
+
+	class Pager extends FragmentStatePagerAdapter {
+
+		public static final int FRAGMENTS = 2;
+
+		public Pager(FragmentManager fm){
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			switch(position){
+				case 0:
+					return new EncodeFragment();
+				case 1:
+					return new DecodeFragment();
+				default:
+					return null; //Error, item position out of bounds
+			}
+		}
+
+		@Override
+		public int getCount() {
+			return FRAGMENTS;
+		}
 	}
 }
+
+
