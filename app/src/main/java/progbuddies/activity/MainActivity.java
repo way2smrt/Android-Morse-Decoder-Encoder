@@ -1,4 +1,4 @@
-package progbuddies.morse;
+package progbuddies.activity;
 
 import android.os.Build;
 import android.support.design.widget.TabLayout;
@@ -12,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
+
+import progbuddies.fragment.DecodeFragment;
+import progbuddies.fragment.EncodeFragment;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>

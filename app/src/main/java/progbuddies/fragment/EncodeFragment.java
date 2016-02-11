@@ -1,5 +1,4 @@
-package progbuddies.morse;
-import android.support.v4.app.Fragment;
+package progbuddies.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import progbuddies.activity.R;
 import progbuddies.morsecode.Encoder;
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
@@ -23,11 +24,18 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_encode, container, false);
-
         encoder = new Encoder();
         /*
         editText = (EditText) view.findViewById(R.id.editText);
+
         button = (Button) view.findViewById(R.id.encodeButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                encodeText(v);
+            }
+        });
+
         textView = (TextView) view.findViewById(R.id.textView);
         */
 
