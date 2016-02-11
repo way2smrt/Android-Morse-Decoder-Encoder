@@ -5,8 +5,10 @@
 	<dimen name="edit_text_title_margin_top">16dp</dimen>
 	<dimen name="edit_text_title_width">64dp</dimen>
 
-	<dimen name="edit_text_title_text_size">14sp</dimen>
-	<dimen name="edit_text_title_height">28dp</dimen>
+	<dimen name="edit_text_title_text_size">12sp</dimen>
+	<dimen name="edit_text_title_height">26dp</dimen>
 
 	<dimen name="edit_text_height">128dp</dimen>
+	<dimen name="rounded_text_box_stroke_width">3dp</dimen>
+	<dimen name="corner_rounding">12dp</dimen>
 </resources>

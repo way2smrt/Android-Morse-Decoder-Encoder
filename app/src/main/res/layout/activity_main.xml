@@ -28,15 +28,10 @@
 	<RelativeLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="128dp"
 		android:layout_below="@+id/tab_layout" android:id="@+id/view_pager_underlay"
-		android:background="@color/fill">
-		<EditText android:layout_width="match_parent" android:layout_height="128dp"
-		          android:id="@+id/edit_text" android:background="@drawable/rounded_text_box"
-		          android:textColor="@color/text" android:gravity="center"
-		          android:layout_centerHorizontal="true"
-		          android:textSize="14sp"
-		/>
+		android:background="@color/dull">
+
 	</RelativeLayout>
 	<android.support.v4.view.ViewPager
         android:layout_width="wrap_content"

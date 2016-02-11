@@ -15,7 +15,19 @@
         android:background="@drawable/rounded_text_box"
         android:layout_marginTop="@dimen/edit_text_title_margin_top"
         android:textSize="14sp"
-        android:layout_centerHorizontal="true" android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginBottom="-3dp"
+        android:layout_marginLeft="@dimen/edit_text_margin_sides"
+        android:layout_alignParentLeft="false"/>
+
+    <EditText android:layout_width="match_parent" android:layout_height="128dp"
+              android:id="@+id/edit_text" android:background="@drawable/rounded_text_box"
+              android:textColor="@color/text" android:gravity="center"
+              android:layout_centerHorizontal="true"
+              android:textSize="14sp"
+              android:layout_marginLeft="@dimen/edit_text_margin_sides"
+              android:layout_marginRight="@dimen/edit_text_margin_sides"
+              android:layout_below="@+id/title"/>
 
     <LinearLayout
         android:orientation="horizontal"
