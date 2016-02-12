@@ -20,11 +20,11 @@
         android:layout_marginLeft="@dimen/edit_text_margin_sides"
         android:layout_alignParentLeft="false"/>
 
-    <EditText android:layout_width="match_parent" android:layout_height="128dp"
+    <TextView android:layout_width="match_parent" android:layout_height="128dp"
               android:id="@+id/edit_text" android:background="@drawable/rounded_text_box"
               android:textColor="@color/text" android:gravity="center"
               android:layout_centerHorizontal="true"
-              android:textSize="14sp"
+              android:textSize="30dp"
               android:layout_marginLeft="@dimen/edit_text_margin_sides"
               android:layout_marginRight="@dimen/edit_text_margin_sides"
               android:layout_below="@+id/title"/>
@@ -45,7 +45,10 @@
             android:id="@+id/dotButton"
             android:textSize="18dp"
             android:layout_marginRight="4dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            />
+
+
 
         <Button
             android:layout_width="wrap_content"
@@ -63,7 +66,8 @@
             android:id="@+id/dashButton"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:layout_marginLeft="4dp"/>
+            android:layout_marginLeft="4dp"
+            />
 
     </LinearLayout>
 
@@ -82,14 +86,16 @@
             android:text="Next Word"
             android:id="@+id/nextWordButton"
             android:textSize="12dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Word"
-            android:id="@+id/deleteWordButton"
-            android:textSize="12dp"/>
+            android:text="Delete"
+            android:id="@+id/delete"
+            android:textSize="12dp"
+            />
 
     </LinearLayout>
 

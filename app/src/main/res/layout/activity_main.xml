@@ -5,20 +5,10 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 tools:context=".MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/bold"
-        android:title="@string/title"
-        android:titleTextColor="@color/text_light"
-        android:elevation="4dp"/>
-
-	<!--Programmatically setting the indicator doesn't always work for some reason on all devices (such as my Moto G), and as such we set it though XML just to be safe.-->
+    <!--Programmatically setting the indicator doesn't always work for some reason on all devices (such as my Moto G), and as such we set it though XML just to be safe.-->
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
         android:background="@color/dull"
         app:tabIndicatorColor="@color/bold"
         app:tabIndicatorHeight="4dp"
