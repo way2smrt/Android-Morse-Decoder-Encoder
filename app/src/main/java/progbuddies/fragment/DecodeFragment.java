@@ -81,7 +81,7 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
     }
 
 
-
+    //TODO: The way the following is implemented is not the most optimal way, however it is fine for our testing purposes.
     public void dot(View view){
         String current = textWindow.getText().toString();
         String updated = current.concat(".");
@@ -108,11 +108,15 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
     }
 
 
-    //TODO: This will throw an error, this is a quick implementation to test it, add proper check
-
     public void delete(View view) {
         String current = textWindow.getText().toString();
-        String updated = textWindow.getText().toString().substring(0, current.length()-1);
+        String updated = "";
+        if(current.length() <= 1) {
+            textWindow.setText("");
+            return;
+        } else {
+             updated = textWindow.getText().toString().substring(0, current.length()-1);
+        }
         updated = updated.trim();
         textWindow.setText(updated);
     }
