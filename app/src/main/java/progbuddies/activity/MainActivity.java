@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity  {
 
 		//Setup tabs and tab fragment content
 		tabLayout.setupWithViewPager(viewPager);
-
 		tabLayout.getTabAt(0).setText("Encode");
 		tabLayout.getTabAt(1).setText("Decode");
 

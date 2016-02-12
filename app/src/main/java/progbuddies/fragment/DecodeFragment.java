@@ -27,8 +27,6 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_decode, container, false);
 
         decoder = new Decoder();
-        editText = (EditText) view.findViewById(R.id.editText);
-        textView = (TextView) view.findViewById(R.id.textView);
 
         return view;
     }

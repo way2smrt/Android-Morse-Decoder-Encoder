@@ -5,5 +5,7 @@
 .DS_Store
 /build
 /captures
+*.iml.idea/compiler.xml .idea/copyright .idea/encodings.xml .idea/gradle.xml .idea/libraries .idea/misc.xml .idea/modules.xml .idea/runConfigurations.xml .idea/vcs.xml .idea/workspace.xml
 *.iml
+
 
