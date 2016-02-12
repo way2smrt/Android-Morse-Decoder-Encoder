@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity  {
 
 		//Create resources compat in order to get colors
 		rc = new ResourcesCompat();
-		
+
 		//Create a FragmentStatePagerAdapter for switching tab content
 		pager = new Pager(getSupportFragmentManager());
 
@@ -60,10 +59,6 @@ public class MainActivity extends AppCompatActivity  {
 			window.setNavigationBarColor(rc.getColor(getResources(), R.color.dull, null));
 		}
 
-		//Setup toolbar (or action bar, as it was formely known)
-		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-		toolbar.setTitle("Morse Decoder/Encoder");
-		toolbar.setTitleTextColor(rc.getColor(getResources(), R.color.text_light, null));
 	}
 
 
