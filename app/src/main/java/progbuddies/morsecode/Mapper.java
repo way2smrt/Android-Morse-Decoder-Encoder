@@ -21,7 +21,6 @@ public class Mapper {
 
     private HashMap<String, Character> morseToCharMap = new HashMap<>();
 
-
     public Mapper() {
         charToMorseMap.put('a', ".-");
         charToMorseMap.put('b', "-...");
@@ -63,6 +62,4 @@ public class Mapper {
             morseToCharMap.put(entry.getValue(),entry.getKey());
         }
     }
-
-
 }

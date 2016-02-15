@@ -1,4 +1,7 @@
 package progbuddies.morsecode;
+import android.os.Vibrator;
+import android.view.View;
+
 import java.util.HashMap;
 
 /**
@@ -44,5 +47,4 @@ public class Encoder {
 
         return withOutInvalidCharacters;
     }
-
 }

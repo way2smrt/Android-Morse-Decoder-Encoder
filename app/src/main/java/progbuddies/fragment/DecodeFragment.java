@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import progbuddies.activity.R;
@@ -19,7 +18,10 @@ import progbuddies.morsecode.Decoder;
 public class DecodeFragment extends android.support.v4.app.Fragment {
 
     Decoder decoder;
-    TextView textWindow;
+
+    TextView morseInput;
+    TextView textOutput;
+
     Button dotButton;
     Button dashButton;
     Button deleteButton;
@@ -30,7 +32,9 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_decode, container, false);
         decoder = new Decoder();
-        textWindow = (TextView) view.findViewById(R.id.edit_text);
+
+        morseInput = (TextView) view.findViewById(R.id.morse_input);
+        textOutput = (TextView) view.findViewById(R.id.text_output);
 
         dotButton = (Button)view.findViewById(R.id.dotButton);
 
@@ -81,45 +85,55 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
     }
 
 
+    public void updateOutput(String text){
+        //Update output every character or every deleted character
+        textOutput.setText(decoder.decode(text));
+    }
+
     //TODO: The way the following is implemented is not the most optimal way, however it is fine for our testing purposes.
     public void dot(View view){
-        String current = textWindow.getText().toString();
+        String current = morseInput.getText().toString();
         String updated = current.concat(".");
-        textWindow.setText(updated);
+        morseInput.setText(updated);
+
+        updateOutput(updated);
     }
 
     public void dash(View view) {
-        String current = textWindow.getText().toString();
+        String current = morseInput.getText().toString();
         String updated = current.concat("-");
-        textWindow.setText(updated);
+        morseInput.setText(updated);
+
+        updateOutput(updated);
     }
 
-
     public void nextCharacterButton(View view) {
-        String current = textWindow.getText().toString();
+        String current = morseInput.getText().toString();
         String updated = current.concat(" ");
-        textWindow.setText(updated);
+        morseInput.setText(updated);
+
+        updateOutput(updated);
     }
 
     public void nextWord(View view) {
-        String current = textWindow.getText().toString();
+        String current = morseInput.getText().toString();
         String updated = current.concat(C.WORD_SEPERATOR);
-        textWindow.setText(updated);
+        morseInput.setText(updated);
     }
 
 
     public void delete(View view) {
-        String current = textWindow.getText().toString();
+        String current = morseInput.getText().toString();
         String updated = "";
         if(current.length() <= 1) {
-            textWindow.setText("");
+            morseInput.setText("");
             return;
         } else {
-             updated = textWindow.getText().toString().substring(0, current.length()-1);
+             updated = morseInput.getText().toString().substring(0, current.length()-1);
         }
         updated = updated.trim();
-        textWindow.setText(updated);
+        morseInput.setText(updated);
+
+        updateOutput(updated);
     }
-
-
 }

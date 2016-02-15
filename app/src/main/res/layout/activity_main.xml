@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context=".MainActivity">
+                tools:context=".MainActivity" android:background="@color/fill">
 
     <!--Programmatically setting the indicator doesn't always work for some reason on all devices (such as my Moto G), and as such we set it though XML just to be safe.-->
     <android.support.design.widget.TabLayout

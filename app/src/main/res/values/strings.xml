@@ -10,4 +10,55 @@
 	<string name="title">Morse Encoder/Decoder</string>
 
 	<string name="action_settings">Settings</string>
+
+	<string name="info_morse_code_map">
+		International Morse Code
+
+		\n\nTime Units:
+		\n1. 1 dot is 1 time unit in length signal on.
+		\n2. 1 dash is 3 time units in length, signal on.
+		\n3. 1 space between letters is 3 time units in length, signal off.
+		\n4. 1 space between words is 7 time units in length, signal off.
+
+		\n\nLetters:
+		\nA: .-
+		\nB: -...
+		\nC: -.-.
+		\nD: -..
+		\nE: .
+		\nF: ..-.
+		\nG: --.
+		\nH: ....
+		\nI: ..
+		\nJ: .---
+		\nK: -.-
+		\nL: .-..
+		\nM: --
+		\nN: -.
+		\nO: ---
+		\nP: .--.
+		\nQ: --.-
+		\nR: .-.
+		\nS: ...
+		\nT: -
+		\nU: ..-
+		\nV: ...-
+		\nW: .--
+		\nX: -..-
+		\nY: -.--
+		\nZ: --..
+
+
+		\n\nNumbers:
+		\n1: .----
+		\n2: ..---
+		\n3: ...--
+		\n4: ....-
+		\n5: .....
+		\n6: -....
+		\n7: --...
+		\n8: ---..
+		\n9: ----.
+		\n0: -----
+	</string>
 </resources>

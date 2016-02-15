@@ -9,13 +9,13 @@ import java.util.HashMap;
  */
 public class Decoder {
 
+	public static final String INVALID_CHAR_MESSAGE = "[INVALID]";
+
     private HashMap<String, Character> map = new HashMap<>();
 
     public Decoder(){
        map = new Mapper().getMorseToCharMap();
-
     }
-
 
     /**
      * @param string String we need decoded from Morse.
@@ -38,13 +38,14 @@ public class Decoder {
             String[] characters = word.split(C.CHARACTER_SEPERATOR);
 
             for(int j = 0; j < characters.length; j++) {
-                builder.append(map.get(characters[j]));
+	            Character c = map.get(characters[j]);
+
+	            //Check if we found a valid match for our morse code sequence, if not say it is invalid
+	            if(c != null) builder.append(c);
+	            else builder.append(INVALID_CHAR_MESSAGE);
             }
             builder.append(" ");
         }
         return builder.toString();
     }
-
-
-
 }
