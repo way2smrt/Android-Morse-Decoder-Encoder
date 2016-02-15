@@ -14,6 +14,7 @@ import android.view.WindowManager;
 
 import progbuddies.fragment.DecodeFragment;
 import progbuddies.fragment.EncodeFragment;
+import progbuddies.fragment.MapFragment;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity  {
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.getTabAt(0).setText("Encode");
 		tabLayout.getTabAt(1).setText("Decode");
+		tabLayout.getTabAt(2).setText("Map");
 
 		//Set top bar and navigation bar color to match theme, if the device  is at a high enough API to support this
 		if(Build.VERSION.SDK_INT >= CUSTOM_TOP_BAR_COLOR_API){
@@ -61,10 +63,9 @@ public class MainActivity extends AppCompatActivity  {
 
 	}
 
-
 	class Pager extends FragmentStatePagerAdapter {
 
-		public static final int FRAGMENTS = 2;
+		public static final int FRAGMENTS = 3;
 
 		public Pager(FragmentManager fm){
 			super(fm);
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity  {
 					return new EncodeFragment();
 				case 1:
 					return new DecodeFragment();
+				case 2:
+					return new MapFragment();
 				default:
 					return null; //Error, item position out of bounds
 			}
