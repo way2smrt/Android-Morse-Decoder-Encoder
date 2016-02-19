@@ -38,7 +38,10 @@ public class Encoder {
                 char c = chars[j];
                 String morse = charToMorseMap.get(c);
                 builder.append(morse);
-                builder.append(C.CHARACTER_SEPERATOR);
+                //This is so there is not 4 spaces between words we don't want to append to end of last char in word
+                if(j!= chars.length-1){
+                    builder.append(C.CHARACTER_SEPERATOR);
+                }
             }
             builder.append(C.WORD_SEPERATOR);
         }
