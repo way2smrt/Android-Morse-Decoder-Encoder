@@ -17,26 +17,52 @@
         android:gravity="center" android:layout_marginBottom="-3dp"
         android:layout_alignParentLeft="false"
         android:layout_marginLeft="@dimen/edit_text_margin_sides"/>
-    <EditText android:layout_width="match_parent" android:layout_height="128dp"
-              android:id="@+id/editText" android:background="@drawable/rounded_box"
-              android:textColor="@color/text" android:gravity="center"
-              android:layout_centerHorizontal="true" android:textSize="14sp"
+
+
+    <EditText android:layout_width="match_parent"
+              android:layout_height="128dp"
+              android:id="@+id/editText"
+              android:background="@drawable/rounded_box"
+              android:textColor="@color/text"
+              android:gravity="center"
+              android:layout_centerHorizontal="true"
+              android:textSize="16sp"
               android:layout_marginLeft="@dimen/edit_text_margin_sides"
               android:layout_marginRight="@dimen/edit_text_margin_sides"
-              android:layout_below="@+id/title"/>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true" android:gravity="center_horizontal"
-        android:background="@drawable/rounded_box"
-        android:layout_marginLeft="@dimen/edit_text_margin_sides"
-        android:layout_marginRight="@dimen/edit_text_margin_sides">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton" android:background="@android:drawable/ic_media_play"
-            android:backgroundTint="@color/dull"/>
-    </LinearLayout>
+              android:layout_below="@+id/title"
+        />
 
+    <TextView
+        android:id="@+id/text_output"
+        android:textColor="@color/text_bold"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textIsSelectable="true"
+        />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:background="@mipmap/ic_play_arrow_black_36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flashMessageButton"
+        android:background="@mipmap/ic_lightbulb_outline_black_36dp"
+        android:layout_toRightOf="@id/imageButton"
+        android:layout_marginLeft="100dp"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

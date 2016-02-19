@@ -21,7 +21,6 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
 
     TextView morseInput;
     TextView textOutput;
-
     Button dotButton;
     Button dashButton;
     Button deleteButton;
@@ -95,7 +94,6 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
         String current = morseInput.getText().toString();
         String updated = current.concat(".");
         morseInput.setText(updated);
-
         updateOutput(updated);
     }
 
@@ -103,7 +101,6 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
         String current = morseInput.getText().toString();
         String updated = current.concat("-");
         morseInput.setText(updated);
-
         updateOutput(updated);
     }
 
@@ -111,7 +108,6 @@ public class DecodeFragment extends android.support.v4.app.Fragment {
         String current = morseInput.getText().toString();
         String updated = current.concat(" ");
         morseInput.setText(updated);
-
         updateOutput(updated);
     }
 

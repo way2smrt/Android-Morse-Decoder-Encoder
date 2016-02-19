@@ -35,7 +35,7 @@ public class Decoder {
 
             word = word.trim();
 
-            String[] characters = word.split(C.CHARACTER_SEPERATOR);
+            String[] characters = word.split(String.valueOf(C.CHARACTER_SEPERATOR));
 
             for(int j = 0; j < characters.length; j++) {
 	            Character c = map.get(characters[j]);
