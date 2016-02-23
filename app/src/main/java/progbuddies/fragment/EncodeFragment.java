@@ -1,5 +1,6 @@
 package progbuddies.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +45,17 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
 
         flashMessageButton = (ImageButton) view.findViewById(R.id.flashMessageButton);
 
-        //TODO: Hide this button on devices without flash
-
-        flashMessageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flashMessage();
-            }
-        });
+        //Check that the current device does have flash, if not don't set a callback for the button and hide it.
+        if(FlashExecutor.doesDeviceHaveFlash(getContext())){
+            flashMessageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    flashMessage();
+                }
+            });
+        } else {
+            flashMessageButton.setVisibility(View.INVISIBLE);
+        }
 
         return view;
     }
@@ -67,12 +71,9 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
 
     private void flashMessage(){
         FlashExecutor executor = new FlashExecutor();
+        executor.setContext(getContext()); //Set the current context to this activity
         executor.setStringToEncode(editText.getText().toString().trim());
         Thread T = new Thread(executor);
         T.start();
     }
-
-
-
-
 }

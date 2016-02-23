@@ -1,5 +1,9 @@
 package progbuddies.flashlight;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.util.Log;
+
 import progbuddies.morsecode.C;
 import progbuddies.morsecode.Encoder;
 
@@ -8,18 +12,29 @@ import progbuddies.morsecode.Encoder;
  */
 public class FlashExecutor implements Runnable{
 
-    private static final String TAG = "progbuddies.flashlight.FlashExecutor";
+    private static final String TAG = "FlashExecutor";
 
     private static STATE state = STATE.AVAILABLE;
 
     private String stringToEncode = "";
+    private Context context;
 
     public void setStringToEncode(String stringToEncode) {
         this.stringToEncode = stringToEncode;
     }
 
+	/**
+     * Checks whether or not the device has flash, and thus can or cannot use the FlashExecutor.
+     */
+    public static boolean doesDeviceHaveFlash(Context context){
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+    }
+
     @Override
     public void run() {
+        /*
+        Make sure to call doesDeviceHaveFlash() if you want to ensure that the current device can use the FlashExecutor.
+         */
 
         if(state == STATE.EXECUTING) {
             return;
@@ -55,6 +70,9 @@ public class FlashExecutor implements Runnable{
         state = STATE.AVAILABLE;
     }
 
+    public void setContext(Context context){
+        this.context = context;
+    }
 
     private void flashOn(Camera cam) {
         Camera.Parameters p = cam.getParameters();
