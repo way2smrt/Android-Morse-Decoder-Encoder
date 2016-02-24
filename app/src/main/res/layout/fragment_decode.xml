@@ -20,102 +20,110 @@
         android:layout_marginLeft="@dimen/edit_text_margin_sides"
         android:layout_alignParentLeft="false"/>
 
-    <TextView android:layout_width="match_parent" android:layout_height="128dp"
-              android:id="@+id/morse_input" android:background="@drawable/rounded_box"
-              android:textColor="@color/text" android:gravity="center"
-              android:layout_centerHorizontal="true"
-              android:textSize="30dp"
-              android:layout_marginLeft="@dimen/edit_text_margin_sides"
-              android:layout_marginRight="@dimen/edit_text_margin_sides"
-              android:layout_below="@+id/title"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_output"
-        android:layout_alignLeft="@+id/morse_input"
-        android:layout_alignRight="@+id/morse_input"
-        android:layout_below="@+id/morse_input"
-        android:layout_above="@+id/morse_input_buttons_primary"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/text_bold"
-        android:textSize="@dimen/output_text_size"
-        android:textIsSelectable="true"
-        />
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/morse_input_buttons_primary"
-        android:gravity="center"
-        android:layout_above="@+id/morse_input_buttons_secondary"
-        android:layout_centerHorizontal="true" android:clickable="false"
-        android:background="@color/fill" android:layout_marginBottom="4dp">
-
-        <Button
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent" android:layout_below="@+id/title"
+        android:layout_above="@+id/morse_input_buttons"
+        android:layout_marginLeft="@dimen/edit_text_margin_sides"
+        android:layout_marginRight="@dimen/edit_text_margin_sides">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/morse_input" android:background="@drawable/rounded_box"
+                  android:textColor="@color/text" android:gravity="center"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="30dp"
+                  android:layout_below="@+id/title" android:layout_weight="2"/>
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dot"
-            android:id="@+id/dotButton"
-            android:textSize="18dp"
-            android:layout_marginRight="4dp"
-            android:textStyle="bold"
-            android:background="@drawable/button"/>
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:id="@+id/nextCharacterButton"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:background="@drawable/button"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dash"
-            android:id="@+id/dashButton"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/button"/>
-
+            android:id="@+id/text_output"
+            android:layout_alignLeft="@+id/morse_input"
+            android:layout_alignRight="@+id/morse_input"
+            android:layout_below="@+id/morse_input"
+            android:layout_above="@+id/morse_input_buttons_primary"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/text_bold"
+            android:textSize="@dimen/output_text_size"
+            android:textIsSelectable="true"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/morse_input_buttons_secondary"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" android:background="@color/fill"
-        android:layout_marginBottom="4dp">
-
-        <Button
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/morse_input_buttons"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Next Word"
-            android:id="@+id/nextWordButton"
-            android:textSize="12dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/button"/>
+            android:id="@+id/morse_input_buttons_secondary"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" android:background="@color/fill"
+            android:layout_marginBottom="4dp">
 
-        <Button
-            android:layout_width="wrap_content"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next Word"
+                android:id="@+id/nextWordButton"
+                android:textSize="12dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/button"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:id="@+id/delete"
+                android:textSize="12dp"
+                android:background="@drawable/button"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:id="@+id/delete"
-            android:textSize="12dp"
-            android:background="@drawable/button"/>
+            android:id="@+id/morse_input_buttons_primary"
+            android:gravity="center"
+            android:layout_above="@+id/morse_input_buttons_secondary"
+            android:layout_centerHorizontal="true" android:clickable="false"
+            android:background="@color/fill" android:layout_marginBottom="4dp">
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dot"
+                android:id="@+id/dotButton"
+                android:textSize="16sp"
+                android:layout_marginRight="4dp"
+                android:textStyle="bold"
+                android:background="@drawable/button"/>
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:id="@+id/nextCharacterButton"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/button"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dash"
+                android:id="@+id/dashButton"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/button"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 
