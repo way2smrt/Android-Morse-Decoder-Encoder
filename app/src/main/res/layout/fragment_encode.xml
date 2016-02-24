@@ -19,51 +19,81 @@
         android:layout_marginLeft="@dimen/edit_text_margin_sides"/>
 
 
-    <EditText android:layout_width="match_parent"
-              android:layout_height="128dp"
-              android:id="@+id/editText"
-              android:background="@drawable/rounded_box"
-              android:textColor="@color/text"
-              android:gravity="center"
-              android:layout_centerHorizontal="true"
-              android:textSize="16sp"
-              android:layout_marginLeft="@dimen/edit_text_margin_sides"
-              android:layout_marginRight="@dimen/edit_text_margin_sides"
-              android:layout_below="@+id/title"
-        />
-
-    <TextView
-        android:id="@+id/text_output"
-        android:textColor="@color/text_bold"
-        android:textSize="30dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/editText"
+        android:layout_height="match_parent" android:id="@+id/layout_content"
+        android:layout_below="@+id/title" android:layout_above="@+id/button_layout"
         android:layout_marginLeft="@dimen/edit_text_margin_sides"
-        android:layout_marginRight="@dimen/edit_text_margin_sides"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:textIsSelectable="true"
-        android:layout_above="@+id/imageButton"
-    />
+        android:layout_marginRight="@dimen/edit_text_margin_sides">
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:id="@+id/editText"
+                  android:background="@drawable/rounded_box"
+                  android:textColor="@color/text"
+                  android:gravity="center"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="16sp"
+                  android:layout_below="@+id/title"
+                  android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/text_output"
+            android:textColor="@color/text_bold"
+            android:textSize="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/editText"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textIsSelectable="true"
+            android:layout_above="@+id/button_layout"
+            android:layout_weight="2"/>
+    </LinearLayout>
 
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:background="@mipmap/ic_play_arrow_black_36dp"
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/button_layout"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/flashMessageButton"
-        android:background="@mipmap/ic_lightbulb_outline_black_36dp"
-        android:layout_toRightOf="@id/imageButton"
-        android:layout_marginLeft="100dp"
-        android:layout_alignParentBottom="true"
-        />
+        android:paddingBottom="12dp" android:layout_alignLeft="@+id/layout_content"
+        android:layout_alignRight="@+id/layout_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/control_layout"
+            android:layout_alignParentBottom="false" android:layout_centerHorizontal="true"
+        >
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/playButton"
+                android:background="@drawable/ic_play_arrow_black_36dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_toLeftOf="@+id/stopButton"/>
+            <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:id="@+id/stopButton" android:background="@drawable/ic_stop_black_36dp"
+                         android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+                         android:layout_marginLeft="8dp"/>
+        </LinearLayout>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/flashMessageButton"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/control_layout"
+            android:adjustViewBounds="false"
+            android:button="@drawable/toggle_flash_button" android:checked="true"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vibrateMessageButton"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignBottom="@+id/control_layout"
+            android:layout_alignParentLeft="true"
+            android:button="@drawable/toggle_vibration_button" android:checked="true"/>
+    </RelativeLayout>
 </RelativeLayout>

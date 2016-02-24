@@ -1,10 +1,10 @@
 package progbuddies.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
     Encoder encoder;
     EditText editText;
     ImageButton encodeMessageButton;
-    ImageButton flashMessageButton;
+    CheckBox flashMessageButton;
     TextView textView;
 
     @Override
@@ -34,7 +34,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
 
         textView = (TextView) view.findViewById(R.id.text_output);
 
-        encodeMessageButton = (ImageButton) view.findViewById(R.id.imageButton);
+        encodeMessageButton = (ImageButton) view.findViewById(R.id.playButton);
 
         encodeMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +43,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        flashMessageButton = (ImageButton) view.findViewById(R.id.flashMessageButton);
+        flashMessageButton = (CheckBox) view.findViewById(R.id.flashMessageButton);
 
         //Check that the current device does have flash, if not don't set a callback for the button and hide it.
         if(FlashExecutor.doesDeviceHaveFlash(getContext())){
