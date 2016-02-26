@@ -20,8 +20,17 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
 
     Encoder encoder;
     EditText editText;
+
     ImageButton encodeMessageButton;
-    CheckBox flashMessageButton;
+    ImageButton stopMessageButton;
+
+    CheckBox flashToggle;
+    CheckBox vibrationToggle;
+
+    FlashExecutor executor;
+
+    boolean flashEnabled = false;
+
     TextView textView;
 
     @Override
@@ -31,31 +40,38 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
         encoder = new Encoder();
 
         editText = (EditText) view.findViewById(R.id.editText);
-
         textView = (TextView) view.findViewById(R.id.text_output);
 
         encodeMessageButton = (ImageButton) view.findViewById(R.id.playButton);
+        stopMessageButton = (ImageButton) view.findViewById(R.id.stopButton);
 
+        flashToggle = (CheckBox) view.findViewById(R.id.flashMessageButton);
+        vibrationToggle = (CheckBox) view.findViewById(R.id.vibrateMessageButton);
+
+        //Check that the current device does have flash, if not hide it.
+        if(FlashExecutor.doesDeviceHaveFlash(getContext())){
+            flashEnabled = true;
+        } else {
+            flashEnabled = false;
+            flashToggle.setVisibility(View.INVISIBLE);
+        }
+
+        //Set callback for when message is to encoded and possibly sent via flash or vibration
         encodeMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 encodeText();
+                sendMessage();
             }
         });
 
-        flashMessageButton = (CheckBox) view.findViewById(R.id.flashMessageButton);
-
-        //Check that the current device does have flash, if not don't set a callback for the button and hide it.
-        if(FlashExecutor.doesDeviceHaveFlash(getContext())){
-            flashMessageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    flashMessage();
-                }
-            });
-        } else {
-            flashMessageButton.setVisibility(View.INVISIBLE);
-        }
+        //Set callback to stop sending a message
+        stopMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMessage();
+            }
+        });
 
         return view;
     }
@@ -68,12 +84,32 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
         textView.setText(encoded);
     }
 
+	/**
+     * Stops sending the message via flash or vibration, if it is active
+     */
+    private void stopMessage(){
+        if(executor != null){
+            executor.stop();
+            executor = null;
+        }
 
-    private void flashMessage(){
-        FlashExecutor executor = new FlashExecutor();
-        executor.setContext(getContext()); //Set the current context to this activity
-        executor.setStringToEncode(editText.getText().toString().trim());
-        Thread T = new Thread(executor);
-        T.start();
+        //TODO implement vibration message stopping
+    }
+
+	/**
+	 * Encodes the message, and also sends it via flash or vibration if it is toggled.
+     */
+    private void sendMessage(){
+        if(!flashToggle.isChecked() && flashEnabled){
+            executor = new FlashExecutor();
+            executor.setContext(getContext()); //Set the current context to this activity
+            executor.setStringToEncode(editText.getText().toString().trim());
+            Thread T = new Thread(executor);
+            T.start();
+        }
+
+        if(!vibrationToggle.isChecked()) {
+            //TODO implement vibration message sending
+        }
     }
 }
