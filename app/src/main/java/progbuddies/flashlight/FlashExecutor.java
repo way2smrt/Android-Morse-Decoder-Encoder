@@ -12,43 +12,39 @@ import progbuddies.morsecode.Encoder;
  */
 public class FlashExecutor implements Runnable{
 
+    private Thread executionThread;
     private static final String TAG = "FlashExecutor";
-
     private static STATE state = STATE.AVAILABLE;
-
     private String stringToEncode = "";
-    private Context context;
 
-    boolean continueFlash = true;
+    public void start() {
+        if(state == STATE.EXECUTING) {
+            return;
+        }
+        executionThread = new Thread(this);
+        executionThread.start();
+    }
+
 
     public void setStringToEncode(String stringToEncode) {
         this.stringToEncode = stringToEncode;
     }
 
-	/**
-     * Checks whether or not the device has flash, and thus can or cannot use the FlashExecutor.
-     */
-    public static boolean doesDeviceHaveFlash(Context context){
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-    }
-
     @Override
     public void run() {
-        /*
-        Make sure to call doesDeviceHaveFlash() if you want to ensure that the current device can use the FlashExecutor.
-         */
 
         if(state == STATE.EXECUTING) {
             return;
         }
-        state = STATE.EXECUTING;
 
+        state = STATE.EXECUTING;
         Camera cam = Camera.open();
 
         char[] stringToEncodeCharArray = getStringToEncodeCharArray();
 
         for(char c : stringToEncodeCharArray) {
-            if(continueFlash){
+
+            if(!executionThread.isInterrupted()){
                 try{
                     if(c == C.DOT) {
                         flashOn(cam);
@@ -66,13 +62,9 @@ public class FlashExecutor implements Runnable{
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-
-                    //Stop encoding via flashlight when interrupted
+                    Log.i(TAG, "Broke out of loop");
                     break;
                 }
-            } else {
-                //Stop encoding via flashlight if something tells us to stop
-                break;
             }
         }
         cam.release();
@@ -80,11 +72,7 @@ public class FlashExecutor implements Runnable{
     }
 
     public void stop(){
-        continueFlash = false;
-    }
-
-    public void setContext(Context context){
-        this.context = context;
+        executionThread.interrupt();
     }
 
     private void flashOn(Camera cam) {

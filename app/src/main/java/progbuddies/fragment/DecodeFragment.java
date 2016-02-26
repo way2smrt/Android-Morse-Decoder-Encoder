@@ -13,7 +13,6 @@ import progbuddies.morsecode.Decoder;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
- *
  */
 public class DecodeFragment extends android.support.v4.app.Fragment {
 
