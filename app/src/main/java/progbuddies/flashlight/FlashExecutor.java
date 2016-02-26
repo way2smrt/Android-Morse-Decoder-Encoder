@@ -19,6 +19,8 @@ public class FlashExecutor implements Runnable{
     private String stringToEncode = "";
     private Context context;
 
+    boolean continueFlash = true;
+
     public void setStringToEncode(String stringToEncode) {
         this.stringToEncode = stringToEncode;
     }
@@ -46,28 +48,39 @@ public class FlashExecutor implements Runnable{
         char[] stringToEncodeCharArray = getStringToEncodeCharArray();
 
         for(char c : stringToEncodeCharArray) {
-            try{
-                if(c == C.DOT) {
-                    flashOn(cam);
-                    Thread.sleep(C.DOT_TIME_INTERVAL);
-                    flashOff(cam);
-                } else if(c == C.DASH) {
-                    flashOn(cam);
-                    Thread.sleep(C.DASH_TIME_INTERVAL);
-                    flashOff(cam);
-                } else if(c == C.CHARACTER_SEPERATOR) {
-                    Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
-                } else if(c == C.WORD_SEPERATOR_PLACEHOLDER) {
-                    Thread.sleep(C.WORD_SEPERATOR_TIME_INTERVAL);
+            if(continueFlash){
+                try{
+                    if(c == C.DOT) {
+                        flashOn(cam);
+                        Thread.sleep(C.DOT_TIME_INTERVAL);
+                        flashOff(cam);
+                    } else if(c == C.DASH) {
+                        flashOn(cam);
+                        Thread.sleep(C.DASH_TIME_INTERVAL);
+                        flashOff(cam);
+                    } else if(c == C.CHARACTER_SEPERATOR) {
+                        Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
+                    } else if(c == C.WORD_SEPERATOR_PLACEHOLDER) {
+                        Thread.sleep(C.WORD_SEPERATOR_TIME_INTERVAL);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                    //Stop encoding via flashlight when interrupted
+                    break;
                 }
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } else {
+                //Stop encoding via flashlight if something tells us to stop
+                break;
             }
-
         }
         cam.release();
         state = STATE.AVAILABLE;
+    }
+
+    public void stop(){
+        continueFlash = false;
     }
 
     public void setContext(Context context){
