@@ -1,6 +1,8 @@
 package progbuddies.fragment;
 
+import android.app.Service;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import progbuddies.activity.R;
-import progbuddies.flashlight.FlashExecutor;
+import progbuddies.flashlight.MessageSender;
 import progbuddies.morsecode.Encoder;
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
@@ -27,7 +29,9 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
     CheckBox flashToggle;
     CheckBox vibrationToggle;
 
-    FlashExecutor executor;
+    Vibrator vibrator;
+
+    MessageSender sender;
 
     boolean flashEnabled = false;
 
@@ -48,8 +52,10 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
         flashToggle = (CheckBox) view.findViewById(R.id.flashMessageButton);
         vibrationToggle = (CheckBox) view.findViewById(R.id.vibrateMessageButton);
 
+        vibrator = (Vibrator) getContext().getSystemService(Service.VIBRATOR_SERVICE);
+
         //Check that the current device does have flash, if not hide it.
-        if(FlashExecutor.doesDeviceHaveFlash(getContext())){
+        if(MessageSender.doesDeviceHaveFlash(getContext())){
             flashEnabled = true;
         } else {
             flashEnabled = false;
@@ -88,9 +94,9 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
      * Stops sending the message via flash or vibration, if it is active
      */
     private void stopMessage(){
-        if(executor != null){
-            executor.stop();
-            executor = null;
+        if(sender != null){
+            sender.stop();
+            sender = null;
         }
 
         //TODO implement vibration message stopping
@@ -100,11 +106,25 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
 	 * Encodes the message, and also sends it via flash or vibration if it is toggled.
      */
     private void sendMessage(){
-        if(!flashToggle.isChecked() && flashEnabled){
-            executor = new FlashExecutor();
-            executor.setContext(getContext()); //Set the current context to this activity
-            executor.setStringToEncode(editText.getText().toString().trim());
-            Thread T = new Thread(executor);
+        if(!flashToggle.isChecked() || !vibrationToggle.isChecked()){
+            sender = new MessageSender();
+            sender.setVibrator(vibrator);
+            sender.setContext(getContext()); //Set the current context to this activity
+            sender.setStringToEncode(editText.getText().toString().trim());
+            Thread T = new Thread(sender);
+
+            if(!flashToggle.isChecked() && vibrationToggle.isChecked()){
+                //Flash only
+                sender.setMode(MessageSender.Mode.FLASH);
+            } else if(flashToggle.isChecked() && !vibrationToggle.isChecked()){
+                //Vibration only
+                sender.setMode(MessageSender.Mode.VIBRATE);
+            } else {
+                //Both
+                sender.setMode(MessageSender.Mode.BOTH);
+            }
+
+            //Start sending message
             T.start();
         }
 

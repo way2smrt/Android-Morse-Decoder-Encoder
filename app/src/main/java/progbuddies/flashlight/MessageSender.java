@@ -2,6 +2,7 @@ package progbuddies.flashlight;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.os.Vibrator;
 import android.util.Log;
 
 import progbuddies.morsecode.C;
@@ -10,9 +11,12 @@ import progbuddies.morsecode.Encoder;
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
  */
-public class FlashExecutor implements Runnable{
+public class MessageSender implements Runnable{
 
     private static final String TAG = "FlashExecutor";
+
+    public enum Mode{VIBRATE, FLASH, BOTH};
+    Mode mode = Mode.BOTH;
 
     private static STATE state = STATE.AVAILABLE;
 
@@ -20,6 +24,8 @@ public class FlashExecutor implements Runnable{
     private Context context;
 
     boolean continueFlash = true;
+
+    Vibrator vibrator;
 
     public void setStringToEncode(String stringToEncode) {
         this.stringToEncode = stringToEncode;
@@ -51,13 +57,35 @@ public class FlashExecutor implements Runnable{
             if(continueFlash){
                 try{
                     if(c == C.DOT) {
-                        flashOn(cam);
-                        Thread.sleep(C.DOT_TIME_INTERVAL);
-                        flashOff(cam);
+                        if(mode == Mode.VIBRATE){
+                            vibrator.vibrate(C.DOT_TIME_INTERVAL);
+                            Thread.sleep(C.DASH_TIME_INTERVAL);
+                        } else if(mode == Mode.BOTH){
+                            vibrator.vibrate(C.DOT_TIME_INTERVAL);
+                            
+                            flashOn(cam);
+                            Thread.sleep(C.DOT_TIME_INTERVAL);
+                            flashOff(cam);
+                        } else if(mode == Mode.FLASH){
+                            flashOn(cam);
+                            Thread.sleep(C.DOT_TIME_INTERVAL);
+                            flashOff(cam);
+                        }
                     } else if(c == C.DASH) {
-                        flashOn(cam);
-                        Thread.sleep(C.DASH_TIME_INTERVAL);
-                        flashOff(cam);
+                        if(mode == Mode.VIBRATE){
+                            vibrator.vibrate(C.DASH_TIME_INTERVAL);
+                            Thread.sleep(C.DASH_TIME_INTERVAL);
+                        } else if(mode == Mode.BOTH){
+                            vibrator.vibrate(C.DASH_TIME_INTERVAL);
+
+                            flashOn(cam);
+                            Thread.sleep(C.DASH_TIME_INTERVAL);
+                            flashOff(cam);
+                        } else if(mode == Mode.FLASH){
+                            flashOn(cam);
+                            Thread.sleep(C.DASH_TIME_INTERVAL);
+                            flashOff(cam);
+                        }
                     } else if(c == C.CHARACTER_SEPERATOR) {
                         Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
                     } else if(c == C.WORD_SEPERATOR_PLACEHOLDER) {
@@ -100,6 +128,14 @@ public class FlashExecutor implements Runnable{
         p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         cam.setParameters(p);
         cam.stopPreview();
+    }
+
+    public void setVibrator(Vibrator vibrator){
+        this.vibrator = vibrator;
+    }
+
+    public void setMode(Mode mode){
+        this.mode = mode;
     }
 
     private char[] getStringToEncodeCharArray() {
