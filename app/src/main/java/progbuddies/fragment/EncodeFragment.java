@@ -98,8 +98,6 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
             sender.stop();
             sender = null;
         }
-
-        //TODO implement vibration message stopping
     }
 
 	/**
@@ -107,6 +105,11 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
      */
     private void sendMessage(){
         if(!flashToggle.isChecked() || !vibrationToggle.isChecked()){
+            if(sender != null){
+                //To ensure we don't have multiple threads running at once, stop any previous one
+                sender.stop();
+            }
+            
             sender = new MessageSender();
             sender.setVibrator(vibrator);
             sender.setContext(getContext()); //Set the current context to this activity
@@ -125,10 +128,6 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
             }
             //Start sending message
             T.start();
-        }
-
-        if(!vibrationToggle.isChecked()) {
-            //TODO implement vibration message sending
         }
     }
 }
