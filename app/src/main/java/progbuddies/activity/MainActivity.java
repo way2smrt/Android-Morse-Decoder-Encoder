@@ -1,5 +1,8 @@
 package progbuddies.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,8 +12,18 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import progbuddies.fragment.DecodeFragment;
 import progbuddies.fragment.EncodeFragment;
@@ -24,14 +37,21 @@ public class MainActivity extends AppCompatActivity  {
 
 	public static final int CUSTOM_TOP_BAR_COLOR_API = 21;
 
+	Toolbar toolbar;
 	ViewPager viewPager;
 	Pager pager;
 	ResourcesCompat rc;
+
+	Dialog mapDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		//Setup toolbar
+		toolbar = (Toolbar)findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 
 		//Create resources compat in order to get colors
 		rc = new ResourcesCompat();
@@ -50,7 +70,6 @@ public class MainActivity extends AppCompatActivity  {
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.getTabAt(0).setText("Encode");
 		tabLayout.getTabAt(1).setText("Decode");
-		tabLayout.getTabAt(2).setText("Map");
 
 		//Set top bar and navigation bar color to match theme, if the device  is at a high enough API to support this
 		if(Build.VERSION.SDK_INT >= CUSTOM_TOP_BAR_COLOR_API){
@@ -63,9 +82,52 @@ public class MainActivity extends AppCompatActivity  {
 
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+			case R.id.action_settings:
+				Toast toast = Toast.makeText(this, "Setting activity will go here, with option to change speed", Toast.LENGTH_SHORT);
+				toast.show();
+
+				return true;
+			case R.id.action_show_morse_map:
+				mapDialog = new Dialog(this, R.style.AppTheme);
+
+				//Get screen display metrics
+				DisplayMetrics dm = new DisplayMetrics();
+				getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+				//Create proportionally size dialog
+				WindowManager.LayoutParams params = mapDialog.getWindow().getAttributes();
+				params.width = (dm.widthPixels/5)*3;
+				params.height = (dm.heightPixels/5)*3;
+				params.gravity = Gravity.CENTER;
+
+				mapDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+				mapDialog.setContentView(R.layout.layout_map);
+
+				//Make sure that dialog hides on touch outside
+				mapDialog.setCanceledOnTouchOutside(true);
+
+				mapDialog.show();
+
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
+
+		return true;
+	}
+
 	class Pager extends FragmentStatePagerAdapter {
 
-		public static final int FRAGMENTS = 3;
+		public static final int FRAGMENTS = 2;
 
 		public Pager(FragmentManager fm){
 			super(fm);
@@ -78,8 +140,6 @@ public class MainActivity extends AppCompatActivity  {
 					return new EncodeFragment();
 				case 1:
 					return new DecodeFragment();
-				case 2:
-					return new MapFragment();
 				default:
 					return null; //Error, item position out of bounds
 			}

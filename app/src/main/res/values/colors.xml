@@ -8,5 +8,5 @@
 	<color name="text_light">@color/fill</color>
 	<color name="text_bold">#000000</color>
 
-	<color name="transparent">#00000000</color>
+	<color name="transparent">#00ffffff</color>
 </resources>

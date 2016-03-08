@@ -123,7 +123,6 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
                 //Both
                 sender.setMode(MessageSender.Mode.BOTH);
             }
-
             //Start sending message
             T.start();
         }

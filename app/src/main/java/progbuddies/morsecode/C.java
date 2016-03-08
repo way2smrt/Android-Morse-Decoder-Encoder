@@ -17,7 +17,7 @@ public class C {
     public static final char DASH = '-';
 
 
-    public static final int DOT_TIME_INTERVAL = 250;
+    public static final int DOT_TIME_INTERVAL = 120;
 
     public static final int DASH_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
 
