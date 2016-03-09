@@ -17,12 +17,17 @@ public class C {
     public static final char DASH = '-';
 
 
-    public static final int DOT_TIME_INTERVAL = 120;
+    public static int DOT_TIME_INTERVAL = 150;
+    public static int MIN_DOT_TIME_INTERVAL = 50;
+    public static int DASH_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
+    public static int CHARACTER_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
+    public static int WORD_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*7;
 
-    public static final int DASH_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
-
-    public static final int CHARACTER_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
-
-    public static final int WORD_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*7;
+    public static void updateTimeInterval(int dotTimeInterval){
+        DOT_TIME_INTERVAL = dotTimeInterval;
+        DASH_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
+        CHARACTER_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*3;
+        WORD_SEPERATOR_TIME_INTERVAL = DOT_TIME_INTERVAL*7;
+    }
 
 }

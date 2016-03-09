@@ -19,15 +19,18 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import progbuddies.fragment.DecodeFragment;
 import progbuddies.fragment.EncodeFragment;
 import progbuddies.fragment.MapFragment;
+import progbuddies.morsecode.C;
 
 /**
  * @author Bilal Tahir <bilal@bilaltahir.com>
@@ -84,21 +87,62 @@ public class MainActivity extends AppCompatActivity  {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		DisplayMetrics dm;
+		WindowManager.LayoutParams params;
+
 		switch(item.getItemId()){
 			case R.id.action_settings:
-				Toast toast = Toast.makeText(this, "Setting activity will go here, with option to change speed", Toast.LENGTH_SHORT);
-				toast.show();
+				mapDialog = new Dialog(this, R.style.AppTheme);
+
+				//Get screen display metrics
+				dm = new DisplayMetrics();
+				getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+				//Create proportionally size dialog
+				params = mapDialog.getWindow().getAttributes();
+				params.width = (dm.widthPixels/5)*3;
+				params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+				params.gravity = Gravity.CENTER;
+
+				mapDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+				View view = getLayoutInflater().inflate(R.layout.layout_settings, null);
+				mapDialog.setContentView(view);
+
+				//Make sure that dialog hides on touch outside
+				mapDialog.setCanceledOnTouchOutside(true);
+
+				mapDialog.show();
+
+				SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+				seekBar.setProgress(C.DOT_TIME_INTERVAL-C.MIN_DOT_TIME_INTERVAL);
+				seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+					@Override
+					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+						updateMorseSpeed(progress);
+					}
+
+					@Override
+					public void onStartTrackingTouch(SeekBar seekBar) {
+						return;
+					}
+
+					@Override
+					public void onStopTrackingTouch(SeekBar seekBar) {
+						return;
+					}
+				});
 
 				return true;
 			case R.id.action_show_morse_map:
 				mapDialog = new Dialog(this, R.style.AppTheme);
 
 				//Get screen display metrics
-				DisplayMetrics dm = new DisplayMetrics();
+				dm = new DisplayMetrics();
 				getWindowManager().getDefaultDisplay().getMetrics(dm);
 
 				//Create proportionally size dialog
-				WindowManager.LayoutParams params = mapDialog.getWindow().getAttributes();
+				params = mapDialog.getWindow().getAttributes();
 				params.width = (dm.widthPixels/5)*3;
 				params.height = (dm.heightPixels/5)*3;
 				params.gravity = Gravity.CENTER;
@@ -115,6 +159,10 @@ public class MainActivity extends AppCompatActivity  {
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	public void updateMorseSpeed(int seekBarValue){
+		C.updateTimeInterval(C.MIN_DOT_TIME_INTERVAL+seekBarValue);
 	}
 
 	@Override

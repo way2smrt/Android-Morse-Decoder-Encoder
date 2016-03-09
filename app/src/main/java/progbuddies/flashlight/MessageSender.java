@@ -59,7 +59,7 @@ public class MessageSender implements Runnable{
                     if(c == C.DOT) {
                         if(mode == Mode.VIBRATE){
                             vibrator.vibrate(C.DOT_TIME_INTERVAL);
-                            Thread.sleep(C.DASH_TIME_INTERVAL);
+                            Thread.sleep(C.DOT_TIME_INTERVAL);
                         } else if(mode == Mode.BOTH){
                             vibrator.vibrate(C.DOT_TIME_INTERVAL);
                             
@@ -71,6 +71,8 @@ public class MessageSender implements Runnable{
                             Thread.sleep(C.DOT_TIME_INTERVAL);
                             flashOff(cam);
                         }
+
+                        Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
                     } else if(c == C.DASH) {
                         if(mode == Mode.VIBRATE){
                             vibrator.vibrate(C.DASH_TIME_INTERVAL);
@@ -86,12 +88,11 @@ public class MessageSender implements Runnable{
                             Thread.sleep(C.DASH_TIME_INTERVAL);
                             flashOff(cam);
                         }
-                    } else if(c == C.CHARACTER_SEPERATOR) {
+
                         Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
-                    } else if(c == C.WORD_SEPERATOR_PLACEHOLDER) {
+                    } else {
                         Thread.sleep(C.WORD_SEPERATOR_TIME_INTERVAL);
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
 

@@ -109,7 +109,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
                 //To ensure we don't have multiple threads running at once, stop any previous one
                 sender.stop();
             }
-            
+
             sender = new MessageSender();
             sender.setVibrator(vibrator);
             sender.setContext(getContext()); //Set the current context to this activity
