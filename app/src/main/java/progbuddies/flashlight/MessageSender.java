@@ -4,6 +4,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.TextView;
 
 import progbuddies.morsecode.C;
 import progbuddies.morsecode.Encoder;
@@ -26,7 +27,7 @@ public class MessageSender implements Runnable{
     boolean continueFlash = true;
 
     Vibrator vibrator;
-
+    
     public void setStringToEncode(String stringToEncode) {
         this.stringToEncode = stringToEncode;
     }
@@ -37,7 +38,7 @@ public class MessageSender implements Runnable{
     public static boolean doesDeviceHaveFlash(Context context){
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
-
+    
     @Override
     public void run() {
         /*
@@ -72,7 +73,9 @@ public class MessageSender implements Runnable{
                             flashOff(cam);
                         }
 
+                        nextChar();
                         Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
+                        nextChar();
                     } else if(c == C.DASH) {
                         if(mode == Mode.VIBRATE){
                             vibrator.vibrate(C.DASH_TIME_INTERVAL);
@@ -89,9 +92,12 @@ public class MessageSender implements Runnable{
                             flashOff(cam);
                         }
 
+                        nextChar();
                         Thread.sleep(C.CHARACTER_SEPERATOR_TIME_INTERVAL);
+                        nextChar();
                     } else {
                         Thread.sleep(C.WORD_SEPERATOR_TIME_INTERVAL);
+                        nextChar();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -106,6 +112,11 @@ public class MessageSender implements Runnable{
         }
         cam.release();
         state = STATE.AVAILABLE;
+    }
+
+
+    public void nextChar(){
+
     }
 
     public void stop(){
@@ -149,8 +160,4 @@ public class MessageSender implements Runnable{
     private enum STATE {
         AVAILABLE, EXECUTING
     }
-
-
-
-
 }

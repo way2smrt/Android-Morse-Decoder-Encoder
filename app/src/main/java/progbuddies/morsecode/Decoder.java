@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public class Decoder {
 
-	public static final String INVALID_CHAR_MESSAGE = "[INVALID]";
+	public static final String INVALID_CHAR_MESSAGE = " ";
 
     private HashMap<String, Character> map = new HashMap<>();
 

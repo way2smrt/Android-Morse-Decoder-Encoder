@@ -15,5 +15,5 @@
 		android:layout_height="wrap_content"
 		android:id="@+id/seekBar" android:progressTint="@color/dull" android:progress="100"
 		android:thumbTint="@color/bold" android:secondaryProgressTint="@color/dull"
-		android:max="250"/>
+		android:max="150"/>
 </LinearLayout>

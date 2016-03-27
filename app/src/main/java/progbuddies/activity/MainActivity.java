@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity  {
 		toolbar = (Toolbar)findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		//Create resources compat in order to get colors
-		rc = new ResourcesCompat();
-
 		//Create a FragmentStatePagerAdapter for switching tab content
 		pager = new Pager(getSupportFragmentManager());
 

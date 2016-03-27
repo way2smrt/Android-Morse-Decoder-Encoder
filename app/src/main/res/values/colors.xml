@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="fill">#f7f9f7</color>
-	<color name="dull">#96b597</color>
-	<color name="bold">#246b26</color>
+	<color name="dull">#699A63</color>
+	<color name="bold">#213C23</color>
 
 	<color name="text">#454745</color>
 	<color name="text_light">@color/fill</color>

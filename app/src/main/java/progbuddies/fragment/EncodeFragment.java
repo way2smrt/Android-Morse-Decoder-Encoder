@@ -36,6 +36,8 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
     boolean flashEnabled = false;
 
     TextView textView;
+    int encodedTextLen = 0;
+    String encodedText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 encodeText();
                 sendMessage();
+                textView.setText(encodedText);
             }
         });
 
@@ -86,8 +89,7 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
     //TODO: Either remove all special characters from text while encoding or add the mapping currently only a-z and 0-9 are supported characters
     private void encodeText() {
         String text = editText.getText().toString().toLowerCase();
-        String encoded = encoder.encode(text);
-        textView.setText(encoded);
+        encodedText = encoder.encode(text);
     }
 
 	/**
@@ -110,10 +112,13 @@ public class EncodeFragment extends android.support.v4.app.Fragment {
                 sender.stop();
             }
 
+            encodedTextLen = 0;
+
             sender = new MessageSender();
             sender.setVibrator(vibrator);
             sender.setContext(getContext()); //Set the current context to this activity
             sender.setStringToEncode(editText.getText().toString().trim());
+            sender.nextChar();
             Thread T = new Thread(sender);
 
             if(!flashToggle.isChecked() && vibrationToggle.isChecked()){
